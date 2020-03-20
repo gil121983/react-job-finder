@@ -30,6 +30,11 @@ class Searcher extends Component {
             where: event.target.value
         })
     }
+    handleResultsPerPageChange = (event) => {
+        this.setState({
+            resultsPerPage: event.target.value
+        })
+    }
     handleSubmit = (event) => {
         event.preventDefault()
         let what = this.state.what;
@@ -52,7 +57,10 @@ class Searcher extends Component {
         return (
             <div style={divStyle}>
                 <form style={searchContainer} onSubmit={this.handleSubmit} >
-                    <AdvanceSearch handleLocationChange={this.handleLocationChange} />
+                    <AdvanceSearch
+                        handleLocationChange={this.handleLocationChange}
+                        handleResultsPerPageChange={this.handleResultsPerPageChange}
+                    />
                     <input type="text" value={what} onChange={this.handleWhatChange} placeholder="WHAT?" style={serachLine} />
                     <select value={country} onChange={this.handleCountryChange} style={selectStyle}>
                         <option value="0">YOUR COUNTRY</option>

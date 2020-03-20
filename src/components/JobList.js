@@ -10,6 +10,9 @@ export class JobList extends Component {
                 key={job.id}
                 title={job.title}
                 company={job.company}
+                salary_is_predicted={job.salary_is_predicted}
+                salary={job.salary}
+                location={job.location.display_name}
                 created={job.created}
                 description={job.description}
                 redirectUrl={job.redirect_url}
