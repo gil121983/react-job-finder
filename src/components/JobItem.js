@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import Toggle from './Toggle'
 
 function removeStrong(str) {
-    return str.replace('<strong>', "").replace('</strong>', "")
+    return str.replace(/[<strong>]/g, "").replace(/[</strong>]/g, "")
 }
 export class JobItem extends Component {
     render() {
         const { title, company, created, description, redirectUrl } = this.props;
         const adDate = created.replace('T', ` at: `).slice(0, -3)
+        console.log(typeof (description))
         return (
             <div style={adContainer}>
                 <div style={adTitle}>
@@ -15,7 +16,7 @@ export class JobItem extends Component {
                     <p style={{ color: 'royalblue' }}>{company.display_name}</p>
                 </div>
                 <div className='desc-container' style={descContainer}>
-                    <Toggle description={description} redirectUrl={redirectUrl} />
+                    <Toggle description={removeStrong(description)} redirectUrl={redirectUrl} />
                 </div>
                 <p style={{ textAlign: 'center', fontSize: '12px' }}> Created on: {adDate} </p>
             </div>
