@@ -14,7 +14,7 @@ export default class AdvanceSearch extends Component {
 
         return (
             <div>
-                <button onClick={this.toggle} style={advSearchBtn}>Advanced Search</button>
+                <div onClick={this.toggle} style={advSearchBtn}>Advanced Search</div>
                 {this.state.on && (
                     //here goes the element to be shown/hide
                     <div>
@@ -26,7 +26,7 @@ export default class AdvanceSearch extends Component {
                             <option>100</option>
                         </select>
                         <input type="text" onChange={this.props.handleLocationChange} placeholder="Location" style={serachLine} />
-                        <button onClick={this.toggle} style={advSearchBtn}>Close Advanced Search</button>
+                        <div onClick={this.toggle} style={advSearchBtn}>Close Advanced Search</div>
                     </div>
                 )}
 
@@ -45,16 +45,16 @@ const advSearchBtn = {
     background: 'none',
     color: 'royalblue',
 }
-const checkboxStyle = {
-    color: 'white',
-    marginLeft: '12px',
-    marginRight: '12px',
-    fontSize: '12px',
-}
-const rangeStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '12px',
-    color: 'white',
-}
+// const checkboxStyle = {
+//     color: 'white',
+//     marginLeft: '12px',
+//     marginRight: '12px',
+//     fontSize: '12px',
+// }
+// const rangeStyle = {
+//     display: 'flex',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     fontSize: '12px',
+//     color: 'white',
+// }

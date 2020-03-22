@@ -1,6 +1,7 @@
 import React, { Component, } from 'react';
 import AdvanceSearch from './AdvanceSearch';
 
+
 class Searcher extends Component {
 
     constructor(props) {
@@ -9,10 +10,17 @@ class Searcher extends Component {
         this.state = {
             what: '',
             country: '',
-            resultsPerPage: '10',
             where: '',
-
+            resultsCount: '',
+            resPerPage: 10,
+            fromResult: 1,
         }
+
+        this.inputRef = React.createRef()
+    }
+
+    componentDidMount() {
+        this.inputRef.current.focus()
     }
 
     handleWhatChange = (event) => {
@@ -32,23 +40,28 @@ class Searcher extends Component {
     }
     handleResultsPerPageChange = (event) => {
         this.setState({
-            resultsPerPage: event.target.value
+            resPerPage: event.target.value
         })
     }
+    // handleNextBtn = (event) => {
+    //     console.log('test next btn ');
+    // }
+
     handleSubmit = (event) => {
         event.preventDefault()
         let what = this.state.what;
         let country = this.state.country;
         if (what && country) {
             let where = this.state.where;
-            let resultsPerPage = this.state.resultsPerPage;
+            let resPerPage = this.state.resPerPage;
+            let fromResult = this.state.fromResult;
             const YOUR_APP_ID = '4ba05dac';
             const YOUR_APP_KEY = '4c1878a7bab48cce0966ca79d9929993';
-            const url = `https://api.adzuna.com/v1/api/jobs/${country}/search/1?app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&results_per_page=${resultsPerPage}&what=${what}&where=${where}&content-type=application/json`
-            console.log(url)
+            const url = `https://api.adzuna.com/v1/api/jobs/${country}/search/${fromResult}?app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&results_per_page=${resPerPage}&what=${what}&where=${where}&content-type=application/json`;
             this.props.getServer(url)
         }
     }
+
 
 
 
@@ -61,7 +74,7 @@ class Searcher extends Component {
                         handleLocationChange={this.handleLocationChange}
                         handleResultsPerPageChange={this.handleResultsPerPageChange}
                     />
-                    <input type="text" value={what} onChange={this.handleWhatChange} placeholder="WHAT?" style={serachLine} />
+                    <input type="text" value={what} onChange={this.handleWhatChange} placeholder="WHAT?" style={serachLine} ref={this.inputRef} />
                     <select value={country} onChange={this.handleCountryChange} style={selectStyle}>
                         <option value="0">YOUR COUNTRY</option>
                         <option value="at">Austria</option>
@@ -121,4 +134,4 @@ const searchBtnStyle = {
     fontSize: '12px',
 }
 
-export default Searcher
+export default Searcher;
