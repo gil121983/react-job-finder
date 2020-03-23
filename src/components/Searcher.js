@@ -6,76 +6,28 @@ class Searcher extends Component {
 
     constructor(props) {
         super(props)
-
-        this.state = {
-            what: '',
-            country: '',
-            where: '',
-            resultsCount: '',
-            resPerPage: 10,
-            fromResult: 1,
-        }
-
         this.inputRef = React.createRef()
     }
 
     componentDidMount() {
         this.inputRef.current.focus()
     }
-
-    handleWhatChange = (event) => {
-        this.setState({
-            what: event.target.value
-        })
-    }
-    handleCountryChange = (event) => {
-        this.setState({
-            country: event.target.value
-        })
-    }
-    handleLocationChange = (event) => {
-        this.setState({
-            where: event.target.value
-        })
-    }
-    handleResultsPerPageChange = (event) => {
-        this.setState({
-            resPerPage: event.target.value
-        })
-    }
-    // handleNextBtn = (event) => {
-    //     console.log('test next btn ');
-    // }
-
     handleSubmit = (event) => {
         event.preventDefault()
-        let what = this.state.what;
-        let country = this.state.country;
-        if (what && country) {
-            let where = this.state.where;
-            let resPerPage = this.state.resPerPage;
-            let fromResult = this.state.fromResult;
-            const YOUR_APP_ID = '4ba05dac';
-            const YOUR_APP_KEY = '4c1878a7bab48cce0966ca79d9929993';
-            const url = `https://api.adzuna.com/v1/api/jobs/${country}/search/${fromResult}?app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&results_per_page=${resPerPage}&what=${what}&where=${where}&content-type=application/json`;
-            this.props.getServer(url)
-        }
+
+        this.props.search()
     }
 
-
-
-
     render() {
-        const { what, country } = this.state
         return (
             <div style={divStyle}>
                 <form style={searchContainer} onSubmit={this.handleSubmit} >
                     <AdvanceSearch
-                        handleLocationChange={this.handleLocationChange}
-                        handleResultsPerPageChange={this.handleResultsPerPageChange}
+                        handleLocationChange={this.props.handleLocationChange}
+                        handleResultsPerPageChange={this.props.handleResultsPerPageChange}
                     />
-                    <input type="text" value={what} onChange={this.handleWhatChange} placeholder="WHAT?" style={serachLine} ref={this.inputRef} />
-                    <select value={country} onChange={this.handleCountryChange} style={selectStyle}>
+                    <input type="text" value={this.props.what} onChange={this.props.handleWhatChange} placeholder="WHAT?" style={serachLine} ref={this.inputRef} />
+                    <select value={this.props.country} onChange={this.props.handleCountryChange} style={selectStyle}>
                         <option value="0">YOUR COUNTRY</option>
                         <option value="at">Austria</option>
                         <option value="au">Australia</option>

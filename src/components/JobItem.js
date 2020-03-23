@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import Toggle from './Toggle'
 
 function removeStrong(str) {
-    return str.replace(/[<strong>]/g, "").replace(/[</strong>]/g, "")
+    return str
+        .replace(/<\/strong>/g, "")
+        .replace(/<strong>/g, "")
 }
 export class JobItem extends Component {
     render() {
         const { title, company, location, created, description, redirectUrl } = this.props;
-        const adDate = created.replace('T', ` at: `).slice(0, -3)
-        console.log(typeof (description))
+        const adDate = created.slice(0, -4).replace('T', ` at: `)
         return (
             <div style={adContainer}>
                 <div style={adTitle}>
